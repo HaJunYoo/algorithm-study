@@ -1,6 +1,10 @@
 from collections import deque
+import sys
+
+input = sys.stdin.readline
 
 N, M = map(int, input().split())
+
 dy = (0, 1, 0, -1)
 dx = (1, 0, -1, 0)
 
