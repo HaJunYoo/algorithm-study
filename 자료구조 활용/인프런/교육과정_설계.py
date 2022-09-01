@@ -19,7 +19,7 @@ for idx, plan in enumerate(plans) :
             # print(first)
             if edu == first:
                 essential.popleft()
-        except : pass
+        except : break
 
 
     if len(essential) != 0 :
@@ -73,4 +73,25 @@ OQASWDFEGRHTCJVYK
 #7 NO
 #8 NO
 #9 NO
+
+------------
+QWERTY
+8
+AYKGDHEJF
+QASWDFEGRHTCJVYK
+ZCTSBDEA
+KJHDGAFQZWXECRVTBY
+WOPASFKGHDEF
+MQASWDFEGRHTCJVYK
+MZCTSBDEA
+NKJHDGAFQZWXECRVTBY
+
+#1 NO
+#2 YES
+#3 NO
+#4 YES
+#5 NO
+#6 YES
+#7 NO
+#8 YES
 '''
