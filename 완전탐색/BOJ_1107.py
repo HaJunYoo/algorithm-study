@@ -38,4 +38,5 @@ for i in range(0, 1000000+1):
         press = abs(c-n)
         if ans > l + press:
             ans = l + press
+
 print(ans)
