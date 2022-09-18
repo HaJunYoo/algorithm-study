@@ -11,9 +11,9 @@ def print_number():
         print(num, end =" ")
     print()
 
-def choose():
+def choose(cnt):
 
-    if len(numbers) == m:
+    if cnt == m :
         print_number()
         return
 
@@ -21,7 +21,7 @@ def choose():
         if not visited[i] :
             numbers.append(i)
             visited[i] = True
-            choose()
+            choose(cnt+1)
             numbers.pop()
             visited[i] = False
 
@@ -30,4 +30,4 @@ def choose():
             continue
 
 
-choose()
+choose(0)
