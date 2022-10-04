@@ -9,6 +9,7 @@ a, b = map(int, input().split())
 g = gcd(a, b)
 print(g)
 
-l = g*(a//g)*(b//g)
+# l = g*(a//g)*(b//g)
+l = (a*b)//g
 
 print(l)
