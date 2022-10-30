@@ -8,7 +8,7 @@ def lingual(func, numbers, n):
 
     else:
         # reverse flag가 홀수이면 loop가 끝나고 뒤집는다
-        # flag --
+        # flag ---
 
         reverse_flag = 0
 
