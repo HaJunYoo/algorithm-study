@@ -1,6 +1,7 @@
-n, m = map(int, input().split())
+import sys
 
-res = 0
+sys.stdin = open("in1.txt", "r")
+input = sys.stdin.readline
 
 
 def permutation(cnt, num):
@@ -15,5 +16,10 @@ def permutation(cnt, num):
         permutation(cnt + 1, num + " " + str(i))
 
 
-permutation(0, "")
-print(res)
+if __name__ == "__main__":
+    n, m = map(int, input().split())
+
+    res = 0
+
+    permutation(0, "")
+    print(res)
