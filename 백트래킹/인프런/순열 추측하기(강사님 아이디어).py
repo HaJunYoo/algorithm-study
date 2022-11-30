@@ -5,7 +5,6 @@ sys.stdin = open("in1.txt", "r")
 # 입력속도가 빨라짐
 input = sys.stdin.readline
 
-
 def solve():
     tmp = 0
     for a, b in zip(d, numbers):
