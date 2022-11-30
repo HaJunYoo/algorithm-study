@@ -19,7 +19,7 @@ def print_numbers():
 
 def permutation(dep):
     global res
-
+    # candidate에 원소가 이미 있으면 실행하지마
     if candidate:
         return
 
@@ -29,6 +29,7 @@ def permutation(dep):
         if res == f:
             print_numbers()
             candidate.append(numbers)
+            sys.exit(0)
         return
 
     for i in range(1, n + 1):
