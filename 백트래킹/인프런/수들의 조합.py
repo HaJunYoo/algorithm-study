@@ -10,11 +10,11 @@ def combination(level, start):
     global res
 
     if level == k:
-        print(numbers, end=' ')
+        # print(numbers, end=' ')
         if sum(numbers) % m == 0:
             res += 1
-            print('정답')
-        print()
+            # print('정답')
+        # print()
         return
 
     for i in range(start, n):
