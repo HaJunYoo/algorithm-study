@@ -2,28 +2,27 @@
 n, m = map(int, input().split())
 
 problems = [tuple(map(int,input().split())) for _ in range(n)]
-# print(problems)
-# visited = [False]*n
-# numbers = []
-score, time = 0, 0
-max_score = 0
+
+max_score = -237778
 
 def dfs(cnt, score, time):
     global max_score
+
+    pro = problems[cnt]
+
+    if time > m:
+        return
+
     # print(cnt)
     if cnt == n-1:
         if max_score < score:
             max_score = score
         return
 
-    pro = problems[cnt]
 
-    if time + pro[1] <= m:
-        dfs(cnt+1, score+pro[0], time+pro[1])
-        dfs(cnt+1, score, time)
+    dfs(cnt+1, score+pro[0], time+pro[1])
+    dfs(cnt+1, score, time)
 
-    else :
-        dfs(cnt+1, score, time)
 
 
 dfs(0, 0, 0)
