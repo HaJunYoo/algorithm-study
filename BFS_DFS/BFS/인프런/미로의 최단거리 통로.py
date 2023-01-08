@@ -23,32 +23,30 @@ visited[0][0] = True
 cnt = 0
 x, y = 0, 0
 
-while True:
+while queue:
 
-    for _ in range(len(queue)):
-        current = queue.popleft()
-        x, y = current
+    current = queue.popleft()
+    x, y = current
+    cnt += 1
+    print(cnt)
 
-        print(cnt)
+    for i in range(4):
+        new_x = x + dx[i]
+        new_y = y + dy[i]
 
-        if x == 6 and y == 6:
-            break
+        if valid_ck(new_x, new_y):
+            if not visited[new_x][new_y] and a[new_x][new_y] != 1:
+                visited[new_x][new_y] = True
+                dis[new_x][new_y] = dis[x][y] + 1
+                queue.append((new_x, new_y))
 
-        for i in range(4):
-            new_x = x + dx[i]
-            new_y = y + dy[i]
-
-            if valid_ck(new_x, new_y):
-                if not visited[new_x][new_y] and a[new_x][new_y] != 1:
-                    visited[new_x][new_y] = True
-                    dis[new_x][new_y] = dis[x][y] + 1
-                    queue.append((new_x, new_y))
-
-    if x == 6 and y == 6:
-        break
 
 # 최단 거리
-print(dis[6][6])
+if dis[6][6] == 0:
+    print(-1)
+else:
+    print(dis[6][6])
+
 for c in dis:
     print(c)
 
