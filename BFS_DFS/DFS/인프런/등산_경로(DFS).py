@@ -1,7 +1,24 @@
 n = int(input())
+a_min = 217000000
+a_max = -217000000
+
+s_x, s_y = 0, 0
+e_x, e_y = n-1, n-1
+
 a = []
-for _ in range(n):
-    a.append(list(map(int, input().split())))
+for k in range(n):
+    temp = list(map(int, input().split()))
+    for j in range(len(temp)):
+        if temp[j] > a_max:
+            e_x, e_y = k, j
+            a_max = temp[j]
+
+        if temp[j] < a_min:
+            s_x, s_y = k, j
+            a_min = temp[j]
+
+    a.append(temp)
+
 
 visited = [[False] * n for _ in range(n)]
 
@@ -20,7 +37,7 @@ def valid_coord(x, y):
 def dfs(x, y):
     global cnt
 
-    if (x, y) == (n - 1, n - 1):
+    if (x, y) == (e_x, e_y):
         cnt += 1
         return
 
@@ -34,6 +51,8 @@ def dfs(x, y):
                 visited[new_x][new_y] = False
 
 
-visited[0][0] = True
-dfs(0, 0)
+print(a_min, a_max)
+
+visited[s_x][s_y] = True
+dfs(s_x, s_y)
 print(cnt)
