@@ -16,4 +16,6 @@ def dfs(k):
         dp[k] = dfs(k - 2) + dfs(k - 1)
         return dp[k]
 
+
 print(dfs(n))
+
