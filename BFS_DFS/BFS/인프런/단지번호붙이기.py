@@ -44,6 +44,7 @@ def dfs(x, y):
 
 
 cnt_arr = []
+arr[0][0] = 0
 for i in range(n):
     for j in range(n):
         cnt = 0
