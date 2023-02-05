@@ -7,6 +7,7 @@ arr.insert(0, 0)
 dp[1] = 1
 res = 0
 
+# 2번째부터 탐색
 for i in range(2, n+1):
     max=0
     # i-1부터 0까지 -1만큼씩 이동

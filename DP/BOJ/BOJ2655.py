@@ -1,44 +1,34 @@
 n = int(input())
-b = [tuple(map(int, input().split())) for i in range(n)]
+bricks = []
+for i in range(n):
+    a, b, c = map(int, input().split())
+    bricks.append((a, b, c, i+1))
+bricks.sort(key = lambda x : x[0], reverse=True)
+# print(bricks)
+dy = [0] * n
+dy[0] = bricks[0][1]
+res = bricks[0][1]
 
-dp = [0] * (n + 1)
-b.insert(0, (0, 0, 0))
-# print(b)
-dp[1] = b[1][1]
+for i in range(1, n):
+    max_h = 0
+    for j in range(i - 1, -1, -1):
+        if bricks[j][2] > bricks[i][2] and dy[j] > max_h:
+            max_h = dy[j]
+    dy[i] = max_h + bricks[i][1]
+    res = max(res, dy[i])
+# print(res)
 
-b_num = [1] * n
-b_num.insert(0, 0)
+res = max(dy)
+index = n-1
+history = []
+while res > 0:
+    if dy[index] == res:
+        history.append(bricks[index][3])
+        res -= bricks[index][1]
+        # print(res)
+    index -= 1
 
-b_dict = {}
-
-for i in range(2, n + 1):
-    # 최대 높이
-    max_height = 0
-    # 개수
-    temp = 0
-    # 가장 긴 인덱스
-    res = 0
-    for j in range(i - 1, 0, -1):
-        # 넓이, 높이, 무게
-        if b[i][0] < b[j][0] and b[i][2] < b[j][2] and dp[j] > max_height:
-            max_height = dp[j]
-            temp += 1
-            res = j
-
-    dp[i] = max_height + b[i][1]
-    b_num[i] += temp
-    # 쌓은 벽돌
-    b_dict[i] = res
-
-print(max(b_num))
-# print(b_dict)
-idx = b_num.index(max(b_num))
-
-flag = True
-print(idx)
-while flag:
-    idx = b_dict.get(idx)
-    print(idx)
-    if b_dict.get(idx) is None:
-        break
-
+# print(history)
+print(len(history))
+for elem in history:
+    print(elem)
