@@ -1,6 +1,6 @@
 import sys
 sys.setrecursionlimit(10 ** 6)
-sys.stdin=open("input.txt", "r")
+# sys.stdin=open("input.txt", "r")
 
 def valid_coord(x, y):
     if 0 <= x < m and 0 <= y < n:
@@ -70,7 +70,11 @@ if __name__ == '__main__':
     if not flag:
         print(-1)
     else:
-        result = max(max(dis))
+        for i in range(m):
+            for j in range(n):
+                if dis[i][j]>result:
+                    result=dis[i][j]
+
         print(result)
 
 '''
