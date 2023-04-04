@@ -1,30 +1,33 @@
 t = int(input())
-k = int(input())
-coins = [[0, 0]]
-for _ in range(k):
+n = int(input())
+coins = []
+for _ in range(n):
     a, b = map(int, input().split())
     coins.append([a, b])
 
-dp = [[0 for _ in range(t + 1)] for _ in range(k + 1)]
-for i in range(k+1):
-    dp[i][0]=1
+dp = [0]*10001
 
-coins.sort(key=lambda x: x[0])
+coins.sort(key=lambda x: x[0], reverse=True)
 
-for i in range(1, k+1):
-    coin, numbers = coins[i]
-    for num in range(numbers + 1):
-        for j in range(t + 1):
-            temp = j + num * coin
-            if temp == 0:
-                continue
-            if temp <= t:
-                dp[i][temp] += dp[i - 1][j]
-            else:
-                break
 
-# dfs(0, 0, 0)
+def dfs(depth, sum, cnt):
+    if sum > 0:
+        dp[sum] += 1
+
+    if sum == t:
+        return
+    if depth == n:
+        return
+
+    coin, num = coins[depth]
+    for i in range(num + 1):
+        if sum + (i * coin) > t:
+            return
+        else:
+            dfs(depth + 1, sum + (i * coin), cnt+1)
+
+
+dfs(0, 0, 0)
 # print(dp)
-# print(dp[k][t])
+print(dp[t])
 # print(dp[15])
-print(dp[k][t])
