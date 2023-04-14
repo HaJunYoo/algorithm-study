@@ -1,6 +1,6 @@
-S = input()
-
 from collections import deque
+
+S = input()
 
 stack = list()
 answer = ''
@@ -9,7 +9,8 @@ queue = deque(S)
 
 while queue:
     elem = queue.popleft()
-    # print(answer)
+    print(answer)
+    print(stack)
     if elem == '(':
         stack.append(elem)
 
@@ -36,3 +37,4 @@ while stack:
 
 print(answer)
 # A+B*C-D/E
+# A*(B+C)
