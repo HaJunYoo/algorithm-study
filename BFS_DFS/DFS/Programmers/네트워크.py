@@ -5,7 +5,6 @@ def dfs(k, graph, visited):
             dfs(i, graph, visited)
 
 def solution(n, computers):
-    dxs, dys = (0, 0, 1, -1), (1, -1, 0, 0)
     
     visited = [0]*n
     answer = 0
