@@ -39,17 +39,17 @@ if __name__ == '__main__':
     dxs, dys = (-1,1,0,0), (0,0,-1,1)
     year = 0
     flag = False
-    while year <= 10:
-        print(graph)
-        print()
+    while year<500:
+        # print(graph)
+        # print()
         res = search(graph)
         if res >= 2:
             flag = True
-            print('2개 이상으로 분리')
+            # print('2개 이상으로 분리')
             break
         
         if max(max(graph)) == 0:
-            print('다 녹았음')
+            # print('다 녹았음')
             break
             
         temp = deepcopy(graph)
