@@ -1,7 +1,6 @@
 from collections import deque
-from copy import deepcopy
 
-def bfs(x_0, y_0, graph, visited):
+def bfs(x_0, y_0, graph, visited, count):
     dxs, dys = (-1,1,0,0), (0,0,-1,1)
     q = deque()
     q.append([x_0, y_0])
@@ -11,21 +10,24 @@ def bfs(x_0, y_0, graph, visited):
         for dx, dy in zip(dxs, dys):
             nx, ny = x_1+dx, y_1+dy
             if 0<=nx<n and 0<=ny<m:
-                if not visited[nx][ny] and graph[nx][ny] > 0:
-                    q.append([nx, ny])
-                    visited[nx][ny] = True
-    
+                if not visited[nx][ny]:
+                    if graph[nx][ny] > 0:
+                        q.append([nx, ny])
+                        visited[nx][ny] = True
+                    elif graph[nx][ny] == 0:
+                        count[x_1][y_1] += 1
+                    
     return visited
                     
         
-def search(graph):
+def search(graph, count):
     visited = [[False]*m for _ in range(n)]
     cnt = 0
     for x in range(n):
         for y in range(m):
             if not visited[x][y]:
                 if graph[x][y] > 0:
-                    visited = bfs(x, y, graph, visited)
+                    visited = bfs(x, y, graph, visited, count)
                     cnt += 1
     # print(cnt)
     return cnt
@@ -35,14 +37,16 @@ def search(graph):
 if __name__ == '__main__':
     n, m = map(int, input().split())
     graph = [list(map(int, input().split())) for _ in range(n)]
-
+    
     dxs, dys = (-1,1,0,0), (0,0,-1,1)
     year = 0
     flag = False
-    while year<500:
+    while True:
         # print(graph)
         # print()
-        res = search(graph)
+        count = [[0]*m for _ in range(n)]
+        res = search(graph, count)
+        
         if res >= 2:
             flag = True
             # print('2개 이상으로 분리')
@@ -51,22 +55,12 @@ if __name__ == '__main__':
         if max(max(graph)) == 0:
             # print('다 녹았음')
             break
-            
-        temp = deepcopy(graph)
+        
+        
         for x in range(n):
             for y in range(m):
-                if graph[x][y] > 0:
-                    cnt = 0
-                    for dx, dy in zip(dxs, dys):
-                        nx, ny = x+dx, y+dy
-                        if 0<=nx<n and 0<=ny<m:
-                            if graph[nx][ny] == 0:
-                                cnt+=1
-                    temp_cnt = temp[x][y] - cnt
-                    temp_cnt = max(temp_cnt, 0)
-                    temp[x][y] = temp_cnt
-                    
-        graph = temp
+                graph[x][y] = max(graph[x][y]-count[x][y],0)
+        
         year += 1
         
         
