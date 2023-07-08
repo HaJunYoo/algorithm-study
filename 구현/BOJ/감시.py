@@ -22,6 +22,7 @@ def dfs(depth:int, graph:list) -> None:
     
     temp = copy.deepcopy(graph) # 각 깊이별 graph 초기화
     
+    # cctv 전부 조회한 후 사각지대(0)의 개수 세기
     if depth == len(cctv):
         count = 0
         for t in temp:
