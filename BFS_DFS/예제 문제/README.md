@@ -1,81 +1,119 @@
-### 길찾기 문제
+## DFS
 
-보통 🔼🔽◀️▶️ 4개의 방향이 많다
+스택이나 재귀를 활용
 
-방향값을 미리 코드에 짜두고 for 문으로 순회하는 기법을 꼭 익혀두자
+재귀를 활용 자체가 스택을 활용하는 것
 
-### DFS
+DFS 는 완전탐색이기 때문에 모든 노드를 깊이 우선적으로 살펴본다
 
-![스크린샷 2022-05-19 오후 9.38.10.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/95d3d245-989e-4df9-9596-d3c6876e211b/스크린샷_2022-05-19_오후_9.38.10.png)
+0→ 1 → 2→ 3 → 4 → 5 → 6→ 7 →  8 → 9 → 10 → 11 → 12
 
-```python
-dy = (0, 1, 0, -1)
-dx = (1, 0, -1, 0)
+최대한 계속 깊게 파고 내려간 후 올라온다 
 
-chk = [[False]*100 for _ in range(100)]
-# False로 채워진 100*100 -> 아직은 모두 미방문
-N = int(input())
-
-def is_valid_coord(y,x):
-	return 0 <= y < N and 0 <= x < N
-
-def dfs(start_y, start_x):
-    	# start_y, start_x 에서 ny, nx로 변경이 되서 dfs 재귀 형식으로 호출되어 진행
-
-	chk[y][x] = True
-	for k in range(4):
-		ny = y + dy[k]
-		nx = x + dx[k]
-		if is_valid_coord(y,x) and not chk[ny][nx]:
-			dfs(ny, nx)
-
-```
-
-### BFS
+해당 방법을 재귀적으로 반복한다
 
 ```python
-dy = (0, 1, 0, -1)
-dx = (1, 0, -1, 0)
+### 인접 행렬로 구현
 
-chk = [[False]*100 for _ in range(100)]
-# False로 채워진 100*100 -> 아직은 모두 미방문
-N = int(input())
+# 13 * 13 크기의 행렬 생성
+adj = [[0] * 13 for _ in range(13)]
 
-def is_valid_coord(y,x):
-	return 0 <= y < N and 0 <= x < N
+# 간선 별 1 연결 부여 
+adj[0][1] = adj[0][7] = 1
+adj[1][2] = adj[1][5] = 1
 
-def bfs(start_y, start_x):
-# bfs는 큐를 사용하여 구현한다
-# 큐는 FirstinFirstout, 반면 스택은 LIFO 이다 
-	q = deque() # deque 선언 
-	q.append((start_y, start_x)) # queue에 start y, start x
-	while len(q) > 0 : # 큐가 존재할 때 
-		y, x = q.popleft() # 큐의 왼쪽을 pop한다 -> 남아 있는 것들 중 제일 번호가 작은 것
-		chk[y][x] = True # 뽑아낸 번호를 방문을 하였다 로 변경 -> True 
-	
-		for k in range(4): # 다음 방문의 후보(총 4군데, 상하좌우)
-			ny = y + dy[k]
-			nx = x + dx[k]
-			if is_valid_coord(ny, nx) and not chk[ny][nx]: 
-													# 방향 별 유효성 검증 및 방문여부 확인
-				q.append((ny, nx)) 
+for row in adj : 
+	print(row)
+
+# 현재 방문한 노드 now를 인자로 받음
+def dfs(now):
+	for nxt in range(13):
+		# 다음으로 가는 노드가 있을 때
+		if adj[now][nxt]: 
+			# 다음 노드의 dfs 호출 
+			dfs(nxt)
+
+def(0)
 ```
 
-- 방문 체크 필요
-- 각 칸이 노드
-- 상하 좌우 4방향의 간선
+## BFS
 
-먼저 dx, dy를 통해 방향을 4개로 잡는다 
 
-범위 이동을 할 때 범위 유효 체크(isValidCoord), 방문 여부 체크( not chk[nx][ny])를 병행해야 한다
+- 큐를 사용해서 구현
+- 깊이를 한단계씩 내려가면서 좌 → 우 를 훑는 방식으로 진행
+- pop을 한 노드에 연결되어 있는 노드들을 큐에 Enque 해준다
 
-→ 두 개의 체크가 통과하였을 때 재귀 형식으로 dfs 혹은 bfs를 불러온다
+- 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12
 
-dy, dx 배열을 사용 안하고도 구현은 가능하지만
+큐 작동 방식
 
-- 코드가 길어지고
-- 코딩 실수가 날 가능성이 농후하다
+- 0 (0 pop)
+- 1 2 (1 pop)
+- 2 3 4 (2 pop)
+- 34 56 ( 3 pop)
+- 4 56 78 ( 4 pop)
+- 56 78 9 (5 pop) → 5는 연결된 노드가 없음
+- 6 78 9 ( 6 pop)
+- 78 9 10 11 12
+    
+    
 
-⇒ dx dy를 먼저 정의해주고 공통된 부분은 묶어서 구현을 해주는 쪽이 좋다
+```python
+from collections import deque
 
-![스크린샷 2022-05-19 오후 10.30.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9ce0a81b-791e-4bca-92ea-7bf75732082e/스크린샷_2022-05-19_오후_10.30.46.png)
+adj = [[0]*13 for _ in range(13)]
+adj[0][1] = adj[0][2] = 1
+adj[1][3] = adj[1][4] = 1
+
+def bfs():
+	dq = deque()
+	dq.append(0)
+	# 큐에 원소가 존재하는 동안 
+	while dq :
+		
+		now = dq.popleft()
+		# pop한 노드에 연결되어 있는 노드를 왼쪽부터 큐에 추가
+		for nxt in range(13):
+			if adj[now][nxt]:
+				dq.append(nxt)
+
+bfs()
+```
+
+## 공통점
+
+- 그래프 탐색 알고리즘
+- 완전 탐색 알고리즘
+    - 장점
+        - 모든 경우의 수를 다 찾아보니까 반드시 정답을 찾을 수 있다
+    - 단점
+        - 완전탐색은 느리다
+
+## 차이점
+
+![스크린샷 2022-05-19 오후 9.03.43.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cbf8d323-f9ee-4c88-88fa-a252bd58663a/스크린샷_2022-05-19_오후_9.03.43.png)
+
+- DFS
+    - 최단거리 탐색 문제에서 DFS는 모든 경우의 수를 전부 탐색해 목표 노드까지 가는 모든 경로 중 최단 거리인 경로를 찾게 된다
+- BFS
+    - 큐를 사용하여 구현
+    - 목표 노드 까지의 최단거리를 묻는 문제
+        - 루트로 부터 거리가 1인 노드들부터 차례대로 거리가 1, 2, 3, 4 인 노드들을 전부 탐색
+        - 그래서 목표 최단 거리인 노드를 만나면 문제를 해결할 수 있다
+            - BFS는 꼭 모든 깊이를 탐색하지 않아도 될 수 있다
+        - 최단거리 문제에서는 DFS보다 유리함
+    
+
+## DFS & BFS
+
+Vertex : 노드(V) , Edge : 간선(E)
+
+- 인접 행렬 vs 인접리스트 의 시간 복잡도
+    - 인접행렬 : $O(V^2)$
+        
+        ![스크린샷 2022-05-19 오후 9.07.59.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/aa1588fd-4ba2-4eaf-9c3c-750e6d3284ec/스크린샷_2022-05-19_오후_9.07.59.png)
+        
+    - 인접리스트 : $O(V+E) := O(max(V, E))$
+        - Vertex와 Edge 중에 압도적으로 큰 숫자가 나올 경우 그 숫자가 해당되는 변수의 시간 복잡도로 취급되어도 거의 유사하다.
+        - 간선 개수(E)가 적으면 인접리스트가 유리 ⇒ O(V)
+        - 만약 간선 개수가 최대로 V^2 만큼 있을 경우 O(V+V^2) → O(V^2) ⇒ 인접 행렬과 유리해진다
