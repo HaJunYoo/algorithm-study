@@ -20,7 +20,6 @@ if __name__ == '__main__':
     # 동 서 남 북
     dir = [(0, 1), (0, -1), (-1, 0), (1, 0)]
     
-    
     #세로 최대값 
     maxh_idx = total.index(max(height))
     #가로 최대값 
