@@ -6,7 +6,7 @@ dp = [[0]*n for _ in range(n)]
 for _ in range(n):
     graph.append(list(map(int, input().split())))
 
-print(graph)
+# print(graph)
 
 dp[0][0] = graph[0][0]
 
