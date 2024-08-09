@@ -8,6 +8,7 @@ graph = [[] for _ in range(n + 1)]
 
 for _ in range(m):
     a, b = map(int, input().split())
+    # 촌은 양방향 연결이기 때문에 각각 노드에 할당
     graph[a].append(b)
     graph[b].append(a)
 
@@ -34,9 +35,12 @@ def dfs(x, cnt):
         # print(path)
         return
 
+    # 그래프에 연결된 노드 탐색
     for i in graph[x]:
+        # 연결된 노드 중 방문하지 않는 노드가 있다면
         if not visited[i]:
             # path.append(i)
+            # 방문
             dfs(i, cnt + 1)
             # path.pop()
 
