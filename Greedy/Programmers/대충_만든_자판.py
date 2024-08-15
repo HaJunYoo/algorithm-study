@@ -8,7 +8,7 @@ def solution(keymap, targets):
 
     result = []
 
-    print(char_min)
+    # print(char_min)
     for target in targets:
         total = 0
         flag = False
