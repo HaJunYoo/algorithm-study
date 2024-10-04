@@ -1,7 +1,8 @@
 from typing import List
 from collections import deque
 
-
+# 시간 복잡도 : O(amount * len(coins)) = O(n * m)
+# 공간 복잡도는 O(amount)
 def coinChange(coins: List[int], amount: int) -> int:
     if amount == 0:
         return 0
