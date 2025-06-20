@@ -1,7 +1,7 @@
 import sys
 
 sys.setrecursionlimit(10 ** 6)
-# 파이썬의 기본 재귀 한계는 1000인데 10의 6승으로 올린다
+# 파이썬의 기본 recursive 한계는 1000인데 10의 6승으로 올린다
 
 input = sys.stdin.readline
 # 빠른 입력 함수

@@ -4,7 +4,7 @@ if __name__ == '__main__':
     n, m, k, x = map(int, input().split())
     link = [[] for _ in range(n+1)]
     
-    # 링크드 리스트 구현 
+    # 링크드 리스트 implementation
     for _ in range(m):
         a, b = map(int, input().split())
         link[a].append(b)
