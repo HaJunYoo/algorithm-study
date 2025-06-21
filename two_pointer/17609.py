@@ -12,6 +12,8 @@ def check_palindrome_status(s):
 
     while left < right:
         if s[left] != s[right]:
+            # s_left = s[left]
+            # s_right = s[right]
             # 한 글자 제거해서 회문이 될 수 있는가?
             if is_palindrome(s, left + 1, right) or is_palindrome(s, left, right - 1):
                 return 1  # 유사회문
