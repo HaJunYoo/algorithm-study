@@ -5,12 +5,14 @@ for _ in range(n):
 
 def check_paper(li, lj, ri, rj):
 
+    # 종료 조건
     if ri - li == 1 and rj - lj == 1:
         if graph[li][lj] == 1:
             return [0, 1]
         else:
             return [1, 0]
 
+    # 색종이 모두 같은 색 종료
     first_value = graph[li][lj]
     is_consistent = True
 
@@ -28,6 +30,7 @@ def check_paper(li, lj, ri, rj):
         else:
             return [0, 1]
 
+    # 재귀 호출
     mi = (li + ri) // 2
     mj = (lj + rj) // 2
 
@@ -37,6 +40,7 @@ def check_paper(li, lj, ri, rj):
     rec2 = check_paper(mi,lj,ri,mj)
     rec3 = check_paper(mi,mj,ri,rj)
 
+    # 데이터 통합
     res[0] = rec0[0] + rec1[0] + rec2[0] + rec3[0]
     res[1] = rec0[1] + rec1[1] + rec2[1] + rec3[1]
     return res
