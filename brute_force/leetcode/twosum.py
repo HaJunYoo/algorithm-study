@@ -27,3 +27,14 @@ class Solution2:
                 ans.pop()
 
         return backtracking(start=0)
+
+
+if __name__ == "__main__":
+    nums = [4, 9, 7, 5, 1]
+    target = 14
+    solution = Solution()
+    # solution2 = Solution2()
+    ans = solution.twoSum(nums=nums, target=target)
+    # ans2 = solution2.twoSum(nums=nums, target=target)
+    print(ans)
+    # print(ans2)
