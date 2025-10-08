@@ -1,4 +1,3 @@
-from copy import deepcopy
 from typing import List
 
 
@@ -7,7 +6,7 @@ class Solution:
     def combine(n: int, k: int) -> List[List[int]]:
         def backtracking(start: int, path: List[int]):
             if len(path) == k:
-                result.append(deepcopy(path))
+                result.append(path[:])
                 return
 
             for i in range(start, n + 1):

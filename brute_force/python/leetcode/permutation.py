@@ -1,4 +1,3 @@
-from copy import deepcopy
 from typing import List
 
 
@@ -24,7 +23,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-    nums = [1,2]
+    nums = [1, 2]
     solution = Solution()
     ans = solution.permute(nums=nums)
     print(ans)
