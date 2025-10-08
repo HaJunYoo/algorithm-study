@@ -1,14 +1,11 @@
-from typing import List
-from copy import deepcopy
-
 from copy import deepcopy
 from typing import List
 
 
 class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
+    @staticmethod
+    def combine(n: int, k: int) -> List[List[int]]:
         def backtracking(start: int, path: List[int]):
-
             if len(path) == k:
                 result.append(deepcopy(path))
                 return
@@ -23,8 +20,8 @@ class Solution:
         return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     n = 4
     k = 2
-    ans = combine(n=n, k=k)
+    ans = Solution.combine(n=n, k=k)
     print(ans)
