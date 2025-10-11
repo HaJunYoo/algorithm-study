@@ -16,6 +16,8 @@ class Solution1:
         return res
 
 
+
+
 if __name__ == '__main__':
     n = 3
     k = 3
